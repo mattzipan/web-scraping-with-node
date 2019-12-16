@@ -1,9 +1,4 @@
-// use requestretry instead and let it return only the repsponse body as in the code before, so I can leave the code as it is
-const request = require("requestretry").defaults({
-  fullResponse: false,
-  maxAttempts: 10,
-  retryDelay: 5000
-});
+const request = require("request-promise");
 const cheerio = require("cheerio");
 
 //url of developer jobs in berlin to scrape
