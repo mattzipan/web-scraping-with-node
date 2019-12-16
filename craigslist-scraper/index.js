@@ -5,6 +5,7 @@ const request = require("requestretry").defaults({
   retryDelay: 5000
 });
 const cheerio = require("cheerio");
+const ObjectsToCsv = require("objects-to-csv")
 
 //url of developer jobs in berlin to scrape
 const url =
@@ -95,10 +96,18 @@ async function scrapeDescription(jobHeaders) {
   );
 }
 
+//write to csv file
+async function createCsvFile(data) {
+  let csv = new ObjectsToCsv(data)
+  //save to file
+  await csv.toDisk("./data.csv")
+}
+
 async function scrapeCraigslist() {
   const jobHeaders = await scrapeJobheader();
   const jobFullData = await scrapeDescription(jobHeaders);
-  console.log(jobFullData);
+
+  await createCsvFile(jobFullData)
 }
 
 scrapeCraigslist();
