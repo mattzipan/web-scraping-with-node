@@ -5,11 +5,11 @@ const fs = require("fs");
 const result = [];
 
 //example of use search URL from MOZ plugin
-//search?gl=us&q=seo%20freelancer&ie=UTF-8&oe=UTF-8&ip=0.0.0.0&pws=0&uule=w+CAIQICIA
+//search?gl=us&q=analytics%20freelancer&ie=UTF-8&oe=UTF-8&ip=0.0.0.0&pws=0&uule=w+CAIQICIA
 
 const scrapeSERP = async () => {
   const html = await request.get(
-    "https://www.google.com/search?q=freelance+data+analyst&safe=strict&gbv=1&sei=Y_H3XcT5F8Opmge8lZfwBA"
+    "https://www.google.com/search?gl=us&q=analytics%20freelancer&ie=UTF-8&oe=UTF-8&ip=0.0.0.0&pws=0&uule=w+CAIQICIA"
   );
 
   //write the response to a local html file to inject jquery locally
@@ -36,7 +36,8 @@ const scrapeSERP = async () => {
         .children("div")
         .children("a")
         .attr("href")
-        .split("q=")[1];
+        .split("q=")[1]
+        .split("&sa")[0]
 
       const description = $(el)
         .children("div:last-child")
@@ -46,12 +47,14 @@ const scrapeSERP = async () => {
       result.push({
         rank: i + 1,
         title,
-        description,
+        // description,
         url
       });
 
-      console.table(result);
+
     });
+
+  console.table(result);
 };
 
 scrapeSERP();
