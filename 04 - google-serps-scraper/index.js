@@ -4,18 +4,19 @@ const fs = require("fs");
 
 const result = [];
 
-//example of use search URL from MOZ plugin
-//search?gl=us&q=analytics%20freelancer&ie=UTF-8&oe=UTF-8&ip=0.0.0.0&pws=0&uule=w+CAIQICIA
+//example from serpstack API with region language and results query paramter
+//http://www.google.com/search?q=seo+freelancer&gl=us&hl=en&safe=0&num=50
 
 const scrapeSERP = async () => {
   const html = await request.get(
-    "https://www.google.com/search?gl=us&q=analytics%20freelancer&ie=UTF-8&oe=UTF-8&ip=0.0.0.0&pws=0&uule=w+CAIQICIA"
+    "http://www.google.com/search?q=seo+freelancer&gl=us&hl=en&safe=0&num=50"
   );
 
   //write the response to a local html file to inject jquery locally
   // fs.writeFileSync("./scraped-serp.html", html);
 
-  //1. open the file with disabled
+  // create selectors
+  //1. open the file with disabled JS
   //2. enable JS again and inject jQuery
   //3. make element selection
 
